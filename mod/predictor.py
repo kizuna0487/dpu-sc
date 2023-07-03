@@ -283,6 +283,7 @@ class PREDICTOR():
         img = []
         fps = 0 
         time_total = 0
+        pred_text = None
 
         image = preprocess_fn(frame, self.input_size)
 
@@ -309,7 +310,8 @@ class PREDICTOR():
             
             fps, time_total, frame,pred_text = draw_outputs_lpr(self,frame, (self.p_boxes, self.p_scores, self.p_classes, self.p_nums), self.classes, i, self.color_list[int(self.p_classes[0][i])], time1)
             self.frame = frame
-        logging.info("LPR result: {}".format(pred_text))
+        if pred_text != None :
+            logging.info("LPR result: {}".format(pred_text))
         logging.info(" Throughput={:.2f} fps, total frames = {:.0f}, time = {:.4f} seconds".format(fps, 1, time_total))
 
         return frame
